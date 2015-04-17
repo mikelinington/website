@@ -11,9 +11,11 @@ bin/
 
 # npm
 node_modules
+npm-debug.log
 
 # bower
 jekyll/bower_components
+bower_components
 
 .vagrant
 
