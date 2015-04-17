@@ -1,5 +1,4 @@
 source: jekyll
 destination: public
-exclude: [ bower_components/jquery/src ]
 plugins: jekyll/_plugins
 lessc: jekyll/_less.js/bin/lessc

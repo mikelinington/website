@@ -19,6 +19,8 @@ module Jekyll
       
       raise "Missing 'lessc' path in site configuration" if !site.config['lessc']
       
+      lessThreads = [];
+      
       # static_files have already been filtered against excludes, etc.
       site.static_files.each do |sf|
         next if not sf.path =~ less_ext
@@ -33,16 +35,20 @@ module Jekyll
         FileUtils.mkdir_p(css_dir)
  
         begin
-          command = [site.config['lessc'], 
+          command = [site.config['lessc'],
+                    '--include-path=jekyll/bower_components/',
                      less_path, 
                      css_path
                      ].join(' ')
                      
-          puts 'Compiling LESS: ' + command
-                     
-          `#{command}`
-          
-          raise "LESS compilations error" if $?.to_i != 0
+          puts 'Compiling LESS: ' + File.basename(less_path)
+
+            thread = Thread.new {
+              system command
+              raise "LESS compilation error" if $?.to_i != 0
+            }
+            thread.abort_on_exception = true
+            lessThreads << thread
         end
         
         # Add this output file so it won't be cleaned
