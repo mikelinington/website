@@ -1,5 +1,5 @@
-name: My cool site
+source: jekyll
 destination: public
-lessc: _less.js/bin/lessc
-markdown: redcarpet
-pygments: true
+exclude: [ bower_components/jquery/src ]
+plugins: jekyll/_plugins
+lessc: jekyll/_less.js/bin/lessc
