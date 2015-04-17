@@ -1,66 +1,66 @@
-module Jekyll
+# module Jekyll
   
-  class LessCssFile < StaticFile
-    def write(dest)
-      # do nothing
-    end
-  end
+#   class LessCssFile < StaticFile
+#     def write(dest)
+#       # do nothing
+#     end
+#   end
   
-# Expects a lessc: key in your _config.yml file with the path to a local less.js/bin/lessc
-# Less.js will require node.js to be installed
-  class LessJsGenerator < Generator
-    safe true
-    priority :low
+# # Expects a lessc: key in your _config.yml file with the path to a local less.js/bin/lessc
+# # Less.js will require node.js to be installed
+#   class LessJsGenerator < Generator
+#     safe true
+#     priority :low
     
-    def generate(site)
-      src_root = site.config['source']
-      dest_root = site.config['destination']
-      less_ext = /\.less$/i
+#     def generate(site)
+#       src_root = site.config['source']
+#       dest_root = site.config['destination']
+#       less_ext = /\.less$/i
       
-      raise "Missing 'lessc' path in site configuration" if !site.config['lessc']
+#       raise "Missing 'lessc' path in site configuration" if !site.config['lessc']
       
-      lessThreads = [];
+#       lessThreads = [];
 
-      # static_files have already been filtered against excludes, etc.
-      site.static_files.each do |sf|
-        next if not sf.path =~ less_ext
-        next if sf.path['bower_components']
+#       # static_files have already been filtered against excludes, etc.
+#       site.static_files.each do |sf|
+#         next if not sf.path =~ less_ext
+#         next if sf.path['bower_components']
         
-        less_path = sf.path
-        css_path = less_path.gsub(less_ext, '.css').gsub(src_root, dest_root)
-        css_dir = File.dirname(css_path)
-        css_dir_relative = css_dir.gsub(dest_root, '')
-        css_name = File.basename(css_path)
+#         less_path = sf.path
+#         css_path = less_path.gsub(less_ext, '.css').gsub(src_root, dest_root)
+#         css_dir = File.dirname(css_path)
+#         css_dir_relative = css_dir.gsub(dest_root, '')
+#         css_name = File.basename(css_path)
 
-        puts 'src_root: ' + src_root
-        puts 'dest_root: ' + dest_root
-        puts 'less_path: ' + less_path
-        puts 'css_path: ' + css_path
-        puts 'css_dir_relative: ' + css_dir_relative
+#         puts 'src_root: ' + src_root
+#         puts 'dest_root: ' + dest_root
+#         puts 'less_path: ' + less_path
+#         puts 'css_path: ' + css_path
+#         puts 'css_dir_relative: ' + css_dir_relative
         
-        FileUtils.mkdir_p(css_dir)
+#         FileUtils.mkdir_p(css_dir)
  
-        begin
-          command = [site.config['lessc'],
-                    '--include-path=jekyll/bower_components/',
-                     less_path, 
-                     css_path
-                     ].join(' ')
+#         begin
+#           command = [site.config['lessc'],
+#                     '--include-path=jekyll/bower_components/',
+#                      less_path, 
+#                      css_path
+#                      ].join(' ')
 
-          puts 'Compiling LESS: ' + File.basename(less_path)
+#           puts 'Compiling LESS: ' + File.basename(less_path)
 
-            thread = Thread.new {
-              system command
-              raise "LESS compilation error" if $?.to_i != 0
-            }
-            thread.abort_on_exception = true
-            lessThreads << thread
-        end
+#             thread = Thread.new {
+#               system command
+#               raise "LESS compilation error" if $?.to_i != 0
+#             }
+#             thread.abort_on_exception = true
+#             lessThreads << thread
+#         end
         
-        # Add this output file so it won't be cleaned
-        site.static_files << LessCssFile.new(site, site.source, css_dir_relative, css_name)
-      end
-    end
+#         # Add this output file so it won't be cleaned
+#         site.static_files << LessCssFile.new(site, site.source, css_dir_relative, css_name)
+#       end
+#     end
     
-  end
-end
+#   end
+# end
