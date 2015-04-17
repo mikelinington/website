@@ -6,35 +6,25 @@
         <title>{{ page.title }}</title>
         <meta name="viewport" content="width=device-width">
 
-        <!-- syntax highlighting CSS -->
-        <link rel="stylesheet" href="/css/syntax.css">
-
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/css/main.css">
 
+        <!-- Bootstrap javascript -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
-
-        <div class="site">
-          <div class="header">
-            <h1 class="title"><a href="/">{{ site.name }}</a></h1>
-            <a class="extra" href="/">home</a>
+      {% include nav.html %} 
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <h1>Hello</h1>
           </div>
-
-          {{ content }}
-
-          <div class="footer">
-            <div class="contact">
-              <p>
-                Caitlin Donnelly<br />
-                Head goon<br />
-                caitlin@goonsRus.com
-              </p>
-            </div>
-            <div class="contact">
-            </div>
+          <div class="col-xs-12 col-md-6">
+            <h2>Two</h2>
           </div>
         </div>
-
+      </div>
+      {% include footer.html %}
     </body>
 </html>

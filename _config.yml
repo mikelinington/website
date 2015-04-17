@@ -1,3 +1,5 @@
-name: Caitlin Donnelly Teaching
+name: My cool site
+destination: public
+lessc: _less.js/bin/lessc
 markdown: redcarpet
 pygments: true
