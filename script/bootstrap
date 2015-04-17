@@ -1,0 +1,7 @@
+#!/bin/bash
+alias npm-exec='PATH=$(npm bin):$PATH'
+
+bundle install --binstubs
+npm install bower
+npm-exec bower install
+
