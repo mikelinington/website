@@ -20,7 +20,7 @@ module Jekyll
       raise "Missing 'lessc' path in site configuration" if !site.config['lessc']
       
       lessThreads = [];
-      
+
       # static_files have already been filtered against excludes, etc.
       site.static_files.each do |sf|
         next if not sf.path =~ less_ext
@@ -31,6 +31,12 @@ module Jekyll
         css_dir = File.dirname(css_path)
         css_dir_relative = css_dir.gsub(dest_root, '')
         css_name = File.basename(css_path)
+
+        puts 'src_root: ' + src_root
+        puts 'dest_root: ' + dest_root
+        puts 'less_path: ' + less_path
+        puts 'css_path: ' + css_path
+        puts 'css_dir_relative: ' + css_dir_relative
         
         FileUtils.mkdir_p(css_dir)
  
@@ -40,7 +46,7 @@ module Jekyll
                      less_path, 
                      css_path
                      ].join(' ')
-                     
+
           puts 'Compiling LESS: ' + File.basename(less_path)
 
             thread = Thread.new {
