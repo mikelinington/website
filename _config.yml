@@ -1,4 +1,4 @@
 source: jekyll
 destination: public
 plugins: jekyll/_plugins
-lessc: jekyll/_less.js/bin/lessc
+lessc: node_modules/less/bin/lessc
