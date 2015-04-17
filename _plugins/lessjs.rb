@@ -42,7 +42,7 @@ module Jekyll
                      
           `#{command}`
           
-          raise "LESS compilation error" if $?.to_i != 0
+          raise "LESS compilations error" if $?.to_i != 0
         end
         
         # Add this output file so it won't be cleaned

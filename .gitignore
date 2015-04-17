@@ -1,1 +1,23 @@
-/public/*
+.DS_Store
+build/build-local.properties
+application/configs/application-local.ini
+.tm_properties
+public
+
+# Bundler -- http://gembundler.com/
+.bundle
+vendor/bundle/ruby
+bin/
+
+# npm
+node_modules
+
+# bower
+jekyll/bower_components
+
+.vagrant
+
+VERSION
+build/artifacts/
+
+*.sublime-workspace
